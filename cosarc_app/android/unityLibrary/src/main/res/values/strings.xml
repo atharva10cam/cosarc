@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">cosarc</string>
+    <string name="FreeformWindowSize_maximize">0</string>
+    <string name="FreeformWindowSize_tablet">0</string>
+    <string name="FreeformWindowSize_phone">0</string>
+    <string name="FreeformWindowOrientation_landscape">0</string>
+    <string name="FreeformWindowOrientation_portrait">0</string>
+</resources>

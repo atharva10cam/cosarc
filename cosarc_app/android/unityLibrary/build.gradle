@@ -1,0 +1,54 @@
+plugins {
+    id "com.android.library"
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    implementation(name: 'unity-classes', ext: 'jar')
+    // Exclude prevents the Duplicate Class error
+    implementation fileTree(dir: 'libs', exclude: ['unity-classes.jar'], include: ['*.jar'])
+}
+
+android {
+    namespace "com.unity3d.player"
+
+    compileSdkVersion 34 
+    buildToolsVersion "34.0.0"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    defaultConfig {
+        minSdkVersion 24 
+        targetSdkVersion 34
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+        versionCode 1
+        versionName "1.0"
+        consumerProguardFiles "proguard-unity.txt"
+    }
+
+    packagingOptions {
+        doNotStrip "*/armeabi-v7a/*.so"
+        doNotStrip "*/arm64-v8a/*.so"
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
+    sourceSets {
+        main {
+            // Forces Gradle to use the engines you manually pasted
+            jniLibs.srcDirs = ['src/main/jniLibs']
+            jni.srcDirs = [] 
+        }
+    }
+}
